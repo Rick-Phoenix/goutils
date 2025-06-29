@@ -2,6 +2,7 @@ package u
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/fatih/color"
 )
@@ -10,6 +11,11 @@ func LogError(s string) {
 	fmt.Print("  ❌  ")
 	red := color.New(color.FgRed).Sprint("Error: ")
 	fmt.Printf("%s%s\n", red, s)
+}
+
+func LogFatal(s string) {
+	LogError(s)
+	os.Exit(1)
 }
 
 func LogWarn(s string) {
