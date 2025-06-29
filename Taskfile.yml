@@ -1,0 +1,6 @@
+version: "3"
+
+tasks:
+  testlog:
+    cmds:
+      - go test -v -run TestLog
