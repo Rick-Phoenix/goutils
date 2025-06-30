@@ -27,6 +27,18 @@ func (s *Set[T]) Delete(val T) {
 	delete(s.elements, val)
 }
 
+func (s *Set[T]) Equal(s1 *Set[T]) bool {
+	return maps.Equal(s.elements, s1.elements)
+}
+
+func (s *Set[T]) DeleteFunc(filter func(T) bool) {
+	for v := range s.elements {
+		if filter(v) {
+			delete(s.elements, v)
+		}
+	}
+}
+
 func (s *Set[T]) Has(val T) bool {
 	_, found := s.elements[val]
 	return found
