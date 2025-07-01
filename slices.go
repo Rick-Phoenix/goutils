@@ -23,7 +23,7 @@ func Dedupe[T comparable](s []T) []T {
 
 func DedupeNonComp[T any](s []T) []T {
 	seen := make(map[string]struct{})
-	uniqueItems := make([]T, 0, len(s))
+	uniqueItems := []T{}
 
 	for _, item := range s {
 		var buf bytes.Buffer
@@ -80,6 +80,15 @@ func ToPtrSlice[T any](s []T) []*T {
 	out := make([]*T, len(s))
 	for i, v := range s {
 		out[i] = &v
+	}
+
+	return out
+}
+
+func ToValSlice[T any](s []*T) []T {
+	out := make([]T, len(s))
+	for i, v := range s {
+		out[i] = *v
 	}
 
 	return out

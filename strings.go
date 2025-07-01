@@ -81,7 +81,7 @@ func AddMissingSuffix(s, suf string) string {
 
 func AddMissingPrefix(s, pref string) string {
 	if !strings.HasPrefix(s, pref) {
-		return s + pref
+		return pref + s
 	}
 	return s
 }
