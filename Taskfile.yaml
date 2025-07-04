@@ -4,3 +4,5 @@ tasks:
   testlog:
     cmds:
       - go test -v -run TestLog
+  scaffold:
+    cmd: go run ./cmd/scaffolder/main.go
