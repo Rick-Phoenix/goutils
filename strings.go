@@ -62,6 +62,18 @@ func Capitalize(s string) string {
 	return string(letters)
 }
 
+func Uncapitalize(s string) string {
+	if s == "" {
+		return s
+	}
+
+	letters := []rune(s)
+
+	letters[0] = unicode.ToLower(letters[0])
+
+	return string(letters)
+}
+
 func RandomString(byteLength int) (string, error) {
 	b := make([]byte, byteLength)
 	_, err := rand.Read(b)
