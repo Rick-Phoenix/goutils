@@ -1,8 +1,8 @@
-{{ define "src/package.json" }}
+{{ define "package.json" }}
 {
-  "name": "frontend",
+  "name": "{{ .PackageName }}",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,11 +12,14 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "lint": "oxlint",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
+  {{ if .IsWails -}}
   "dependencies": {
     "@wailsio/runtime": "latest"
   },
+  {{ end -}}
   "devDependencies": {
     "@tsconfig/svelte": "^5.0.2",
     "tslib": "^2.6.2",
