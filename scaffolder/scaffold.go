@@ -26,13 +26,13 @@ func ScaffoldMoonRepo(rootDir string, tmplData any) error {
 		return err
 	}
 
-	u.LogSuccess(fmt.Sprintf("Generated moonrepo files in %s", rootDir))
+	u.LogSuccess(fmt.Sprintf("Generated moonrepo files in %s", getPath(rootDir)))
 
 	return nil
 }
 
 func ScaffoldPreCommit(rootDir string, tmplData any) error {
-	tmpl, err := parseTemplates(".pre-commit-config.yaml")
+	tmpl, err := parseTemplates("pre-commit-config.yaml")
 	if err != nil {
 		return err
 	}
@@ -42,7 +42,7 @@ func ScaffoldPreCommit(rootDir string, tmplData any) error {
 		return err
 	}
 
-	u.LogSuccess(fmt.Sprintf("Generated .pre-commit-config.yaml in %s.\nRemember to run `pre-commit install` to install the hooks.", rootDir))
+	u.LogSuccess(fmt.Sprintf("Generated .pre-commit-config.yaml in %s. Remember to run `pre-commit install` to install the hooks.", getPath(rootDir)))
 
 	return nil
 }
@@ -58,7 +58,7 @@ func ScaffoldGo(rootDir string, tmplData any) error {
 		return err
 	}
 
-	u.LogSuccess(fmt.Sprintf("Scaffolded go project in %s", rootDir))
+	u.LogSuccess(fmt.Sprintf("Scaffolded go project in %s", getPath(rootDir)))
 
 	return nil
 }
@@ -74,7 +74,7 @@ func ScaffoldSvelte(rootDir string, tmplData any) error {
 		return err
 	}
 
-	u.LogSuccess(fmt.Sprintf("Generated svelte project in %s", rootDir))
+	u.LogSuccess(fmt.Sprintf("Generated svelte project in %s", getPath(rootDir)))
 
 	return nil
 }
@@ -127,6 +127,15 @@ func writeTemplates(tmpl *template.Template, rootDir string, tmplData any, ignor
 	}
 
 	return nil
+}
+
+func getPath(path string) string {
+	if path == "." || path == ".." {
+		pathName, _ := filepath.Abs(path)
+		return pathName
+	}
+
+	return path
 }
 
 var funcMap = template.FuncMap{}
