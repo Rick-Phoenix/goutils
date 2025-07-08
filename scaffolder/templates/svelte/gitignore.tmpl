@@ -2,6 +2,21 @@
 # Caches
 .task
 .cache 
+.moon/cache
+.moon/docker
+
+# Output
+out
+*.js.map
+*.d.ts 
+*.tsbuildInfo
+.output
+.vercel
+.netlify
+.wrangler
+.svelte-kit
+dist
+build/**
 
 {{ if .IsWails }}
 # Wails
@@ -10,6 +25,7 @@ bin
 generated
 output
 bindings
+!build/**/*.yml
 {{ end }}
 
 # Llm files
@@ -19,27 +35,33 @@ llms-medium.txt
 # Node modules
 node_modules
 
-# Output
-.output
-.vercel
-.netlify
-.wrangler
-.svelte-kit
-dist
-build/**
-!build/**/*.yml
-
-# OS
-.DS_Store
-Thumbs.db
-
 # Env
 .env
 .env.*
 !.env.example
 !.env.test
 
-# Vite
+# Temporary Files
+*.tmp
+*.swp
+*.swo
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Logs
+logs/
+*.log
+pnpm-debug.log*
+
+# Operating System Generated Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test Reports & Coverage
+coverage/
+lcov-report/
+*.lcov
+.nyc_output/
+
 {{ end }}
