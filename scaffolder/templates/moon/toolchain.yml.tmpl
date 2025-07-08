@@ -1,0 +1,15 @@
+{{ define ".moon/toolchain.yml" }}
+$schema: "https://moonrepo.dev/schemas/toolchain.json"
+
+node:
+  packageManager: "{{ .PackageManager }}"
+  inferTasksFromScripts: false
+
+typescript:
+  syncProjectReferences: true
+  syncProjectReferencesToPaths: true
+  createMissingConfig: false
+  includeProjectReferenceSources: false
+  projectConfigFileName: "{{ .ProjectTsconfig }}"
+  rootOptionsConfigFileName: '{{ .RootOptionsTsconfig }}'
+{{ end }}

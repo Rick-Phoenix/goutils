@@ -1,10 +1,12 @@
 package u
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func WriteFile(buffer bytes.Buffer, path string) error {
@@ -17,4 +19,26 @@ func WriteFile(buffer bytes.Buffer, path string) error {
 	}
 
 	return nil
+}
+
+func FileExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
+func PromptIfFileExists(path string) bool {
+	exists := FileExists(path)
+	if exists {
+		fmt.Printf("File '%s' already exists. Overwrite? (y/N): ", path)
+		reader := bufio.NewScanner(os.Stdin)
+		reader.Scan()
+		response := strings.ToLower(strings.TrimSpace(reader.Text()))
+
+		if response != "y" {
+			fmt.Printf("Skipping file '%s'.\n", path)
+			return false
+		}
+	}
+
+	return true
 }

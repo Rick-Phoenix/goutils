@@ -1,0 +1,13 @@
+{{ define ".moon/workspace.yml" }}
+$schema: "./cache/schemas/workspace.json"
+
+projects:
+  - "apps/*"
+  - "packages/*"
+
+vcs:
+  defaultBranch: main
+
+pipeline:
+  installDependencies: false
+{{ end }}
