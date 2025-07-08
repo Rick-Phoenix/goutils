@@ -27,6 +27,24 @@ func main() {
 				},
 			},
 			{
+				Name:  "pre-commit",
+				Usage: "Generate a .pre-commit-config.yaml file",
+				Flags: []cli.Flag{
+					dirFlag,
+					&cli.BoolFlag{
+						Name:  "oxlint",
+						Usage: "Add a hook for oxlint",
+					},
+				},
+				Action: func(ctx context.Context, c *cli.Command) error {
+					data := map[string]any{
+						"Oxlint": c.Bool("oxlint"),
+					}
+
+					return scaffolder.ScaffoldPreCommit(c.String("dir"), data)
+				},
+			},
+			{
 				Name:  "moon",
 				Usage: "Set up moonrepo",
 				Flags: []cli.Flag{

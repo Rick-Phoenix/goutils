@@ -31,6 +31,22 @@ func ScaffoldMoonRepo(rootDir string, tmplData any) error {
 	return nil
 }
 
+func ScaffoldPreCommit(rootDir string, tmplData any) error {
+	tmpl, err := parseTemplates(".pre-commit-config.yaml")
+	if err != nil {
+		return err
+	}
+
+	err = writeTemplates(tmpl, rootDir, tmplData)
+	if err != nil {
+		return err
+	}
+
+	u.LogSuccess(fmt.Sprintf("Generated .pre-commit-config.yaml in %s.\nRemember to run `pre-commit install` to install the hooks.", rootDir))
+
+	return nil
+}
+
 func ScaffoldGo(rootDir string, tmplData any) error {
 	tmpl, err := parseTemplates(".gitignore", ".pre-commit-config.yaml", "Taskfile.yaml", "main_test.go")
 	if err != nil {

@@ -4,4 +4,14 @@ repos:
     rev: v8.27.2
     hooks:
       - id: gitleaks
+  {{ if .Oxlint -}}
+  - repo: local
+    hooks:
+      - id: oxlint
+        name: oxlint
+        entry: oxlint
+        language: system
+        files: '\.svelte$|\.js$|\.ts$'
+        types: [file]
+  {{ end -}}
 {{ end }}
